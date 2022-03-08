@@ -15,6 +15,7 @@ public class LinkedList {
 
 	private Node first;
 	private Node last;
+	private int size;
 
 	// addFirst
 	public void addFirst(int item) {
@@ -25,6 +26,7 @@ public class LinkedList {
 			node.next = first;
 			first = node;
 		}
+		size++;
 
 	}
 
@@ -37,6 +39,7 @@ public class LinkedList {
 			last.next = node;
 			last = node;
 		}
+		size++;
 	}
 
 	// deleteFirst
@@ -51,6 +54,8 @@ public class LinkedList {
 		Node second = first.next;
 		first.next = null;
 		first = second;
+		
+		size --;
 	}
 
 	// deleteLast
@@ -65,6 +70,7 @@ public class LinkedList {
 		Node previous = getPrevious(last);
 		last = previous;
 		last.next = null;
+		size--;
 	}
 
 	// contains
@@ -100,4 +106,72 @@ public class LinkedList {
 		}
 		return null;
 	}
+	
+	
+	public int size() {
+		return size;
+	}
+	
+	public int[] toArray() {
+		int[] array = new int[size];
+		var current = first;
+		var index = 0;
+		
+		while(current != null) {
+			array[index++] = current.value;
+			current = current.next;
+		}
+		return array;
+	}
+	
+	public void reverse() {
+		if(isEmpty()) return;
+		
+		var previous = first;
+		var current = first.next;
+		
+		last = first;
+		last.next = null;
+		while(current !=null) {
+			var next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+		}
+		first = previous;
+	}
+	
+	public int getKthFromTheEnd(int k) {
+		if(isEmpty())
+			throw new IllegalStateException();
+		var a = first;
+		var b = first;
+		for(int i = 0; i < k - 1; i++) {
+			b = b.next;
+			if(b == null)
+				throw new IllegalArgumentException();
+		}
+		while(b != last) {
+			a = a.next;
+			b = b.next;
+		}
+		return a.value;
+	}
+	
+	public void printMiddle() {
+		if(isEmpty())
+			throw new IllegalStateException();
+		
+		var a = first;
+		var b = first;
+		while(b != last && b.next != last) {
+			b = b.next.next;
+			a = a.next;
+		}
+		if(b == last) 
+			System.out.println(a.value);
+		else
+			System.out.println(a.value + ", " + a.next.value);
+	}
+	
 }
