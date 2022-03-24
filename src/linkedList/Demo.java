@@ -14,8 +14,7 @@ public class Demo {
 		System.out.println("size="+list.size());
 		System.out.println("kth from end="+list.getKthFromTheEnd(1));
 		System.out.print("middle=");
-		list.printMiddle();
-		System.out.println();
+		var node = list.printMiddle2();
 		//list.removeFirst();
 		//list.removeLast();
 		list.reverse();

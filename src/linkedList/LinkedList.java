@@ -1,5 +1,8 @@
 package linkedList;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class LinkedList {
@@ -173,5 +176,126 @@ public class LinkedList {
 		else
 			System.out.println(a.value + ", " + a.next.value);
 	}
+	
+	public Node printMiddle2() {
+		var slow = first;
+		var fast = first.next;
+		while(fast != null && fast.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+		return slow;
+	}
+	
+	public void removeLoop(Node head){
+        Node current = null;
+        HashSet<Node> set = new HashSet<>();
+        
+        if(head == null)
+            return;
+        
+        while(head != null){
+            if(set.contains(head)){
+                current.next = null;
+                break;
+            }else{
+                set.add(head);
+                current = head;
+                head = head.next;
+            }
+            
+        }
+    }
+	/*
+	 * 
+	 * Given a singly linked list of size N. 
+	 * The task is to left-shift the linked list by k nodes, 
+	 * where k is a given positive integer smaller than or 
+	 * equal to length of the linked list.
+	 */
+	 public Node rotate(Node head, int k) {
+	       while(k-- > 0){
+	           Node temp = head;
+	           Node last = new Node(head.value);
+	           last.next = null;
+	           while(temp.next != null){
+	               temp = temp.next;
+	           }
+	           temp.next = last;
+	           head = head.next;
+	       }
+	       
+	       return head;
+	    }
+	 /*
+	  * Given a singly linked list of size N of integers. 
+	  * The task is to check if the given linked list is palindrome or not.
+	  */
+	 public boolean isPalindrome(Node head) 
+	    {
+	        List<Integer> list = new ArrayList<>();
+	        while(head != null){
+	            list.add(head.value);
+	            head = head.next;
+	        }
+	        
+	        int lower = 0, n = list.size(), upper = n -1;
+	        while(lower < upper){
+	            if(list.get(lower) != list.get(upper)){
+	                return false;
+	            }
+	            lower++;
+	            upper--;
+	        }
+	        return true;
+	    }
+	 /*
+	  * Given a linked list of N nodes. The task is to reverse this list.
+	  * Input: LinkedList: 1->2->3->4->5->6
+	  * Output: 6 5 4 3 2 1
+	  */
+	 public Node reverseList(Node head)
+	    {
+	        Node previous = null, current = head, temp = head;
+	        
+	        while(temp != null){
+	            temp = current.next;
+	            current.next = previous;
+	            previous = current;
+	            current = temp;
+	        }
+	        
+	        return previous;
+	    }
+	 /*
+	  * Given a singly linked list of N nodes.
+	  * The task is to find the middle of the linked list. For example, if the linked list is
+	  * 1-> 2->3->4->5, then the middle node of the list is 3.
+	  * If there are two middle nodes(in case, when N is even), print the second middle element.
+	  * For example, if the linked list given is 1->2->3->4->5->6, then the middle node of the list is 4.
+	  */
+	 public int getMiddle(Node head)
+	    {
+	        //Space = O(n+n)
+	        Node slow = head;
+	        Node fast = head.next;
+	        int length = 0;
+	        if(head == null) return -1;
+	        //Time = O(n)
+	        while(head != null){
+	            length++;
+	            head = head.next;
+	        }
+	        //Time = O(log n)
+	        while(fast != null && fast.next != null){
+	            
+	            slow = slow.next;
+	            fast = fast.next.next;
+	        
+	        }
+
+	        return length % 2 == 0 ? slow.next.value : slow.value;
+	        
+	    }
 	
 }
