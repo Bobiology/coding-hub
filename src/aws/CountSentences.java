@@ -34,7 +34,7 @@ public class CountSentences {
 		String[] sentenceWords = sentences.toArray(new String[0]);
 		 for(String sentence: sentenceWords) {
 			 System.out.println("word="+sentence);
-			 String[] words = sentence.split("\s");
+			 String[] words = sentence.split("\\s");
 			 
 			 System.out.println(Arrays.toString(words));
 		 }

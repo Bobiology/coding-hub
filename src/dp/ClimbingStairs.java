@@ -3,7 +3,7 @@ package dp;
 public class ClimbingStairs {
 
 	public static void main(String[] args) {
-		System.out.println(getDistinctWays(2));
+		System.out.println(distinctWays(2));
 	}
 	
 	static int getDistinctWays(int n) {
@@ -15,14 +15,14 @@ public class ClimbingStairs {
 	//Optimized
 	static int distinctWays(int n) {
 		int prev2 = 1;
-		int prev = 1;
-		
+		long prev = 1;
+
 		for(int i = 2; i<=n; i++) {
-			int current = prev2 + prev;
-			prev2 = prev;
+			int current = (int) (prev2 + prev);
+			prev2 = (int) prev;
 			prev = current;
 		}
-		return prev;
+		return (int) prev;
 	}
 
 }

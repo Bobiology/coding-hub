@@ -21,8 +21,12 @@ public class RemoveDuplicates {
 		for (int item : list) {
 			if (map.containsKey(item))
 				map.put(item, map.get(item) + 1);
-			map.put(item, 1);
+			else
+				map.put(item, 1);
 		}
+		
+		System.out.println("map:"+map);
+		
 		list = new LinkedList<Integer>();
 		for (var keyset : map.entrySet()) {
 			if (keyset.getValue() == 1) {

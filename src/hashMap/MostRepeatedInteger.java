@@ -39,4 +39,18 @@ public class MostRepeatedInteger {
 		}
 		return value;
 	}
+	
+    public int firstUniqChar(String s) {
+        
+        for(int i=0;i<s.length();i++)
+        {
+            char c = s.charAt(i);
+            int index = s.indexOf(c);
+            
+            if (index == s.lastIndexOf(c)) 
+                return index;
+            
+        }
+        return -1;
+    }
 }
